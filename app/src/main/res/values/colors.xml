@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="deep_green">#215C60</color>
+    <color name="grade_color">#59091C4F</color>
+    <color name="deep_green2">#1B5E62</color>
+    <color name="popUpColor">#ACE2E5</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="drawer_bg1">#44BEC6</color>
+    <color name="drawer_bg2">#093437</color>
+</resources>
