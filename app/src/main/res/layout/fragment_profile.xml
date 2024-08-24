@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/profile_pic"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:contentDescription="@string/profile_pic"
         android:src="@drawable/img_4"
         app:layout_constraintBottom_toTopOf="@id/guideline1"
@@ -23,7 +23,8 @@
         android:layout_height="wrap_content"
         android:text="@string/profile"
         android:textColor="@color/black"
-        android:textSize="48sp"
+        android:textSize="36sp"
+        android:fontFamily="@font/gravitas_one"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/profile_pic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,22 +37,22 @@
         android:layout_height="wrap_content"
         android:text="@string/usr"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/profile_pic"/>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@id/cardview1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="@id/profile_pic"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="@id/text_view1"
-        app:layout_constraintBottom_toBottomOf="@id/text_view1">
+        app:layout_constraintTop_toBottomOf="@id/text_view1">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -65,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/enter_your_username"
                 android:inputType="textPersonName"/>
 
@@ -77,10 +79,9 @@
         android:layout_height="wrap_content"
         android:text="@string/email"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/text_view1"/>
+        app:layout_constraintTop_toBottomOf="@id/cardview1"/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
@@ -90,10 +91,9 @@
         app:cardElevation="8dp"
         app:cardCornerRadius="8dp"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="@id/profile_pic"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="@id/text_view2"
-        app:layout_constraintBottom_toBottomOf="@id/text_view2">
+        app:layout_constraintTop_toBottomOf="@id/text_view2">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -106,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/enter_your_email"
                 android:inputType="textEmailAddress"/>
 
@@ -118,10 +119,9 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:text="@string/birthday"
-        android:textSize="20sp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@id/text_view2"/>
+        app:layout_constraintTop_toBottomOf="@id/cardview2"/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="0dp"
@@ -131,10 +131,9 @@
         app:cardElevation="8dp"
         app:cardCornerRadius="8dp"
         android:background="@color/white"
-        app:layout_constraintStart_toStartOf="@id/profile_pic"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintEnd_toStartOf="@id/guideline4"
-        app:layout_constraintTop_toTopOf="@id/text_view3"
-        app:layout_constraintBottom_toBottomOf="@id/text_view3">
+        app:layout_constraintTop_toBottomOf="@id/text_view3">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -147,6 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/dd_mm_yyyy"
                 android:inputType="date"/>
 
@@ -158,7 +158,7 @@
         android:layout_height="70dp"
         android:id="@+id/image1"
         android:contentDescription="@string/Button"
-        android:src="@drawable/img"
+        android:src="@drawable/btn_gradient"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/guideline2"
@@ -168,15 +168,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_changes"
-        android:textStyle="bold"
-        android:textSize="36sp"
+        android:textSize="28sp"
         android:textColor="@color/white"
-        android:paddingBottom="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline2"
-        app:layout_constraintBottom_toTopOf="@id/guideline2"/>
+        app:layout_constraintEnd_toEndOf="@id/image1"
+        app:layout_constraintStart_toStartOf="@id/image1"
+        app:layout_constraintTop_toTopOf="@id/image1"
+        app:layout_constraintBottom_toBottomOf="@id/image1"/>
 
 
     <androidx.constraintlayout.widget.Guideline

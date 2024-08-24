@@ -11,7 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.databinding.FragmentTaskPanelBinding
 import com.example.todo.utils.TodoAdapter
@@ -37,6 +39,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
     private var popUpFragment: AddTodoPopUpFragment? = null
     private lateinit var adapter: TodoAdapter
     private lateinit var mList: MutableList<TodoData>
+    private var email: String? = null
 
 
     override fun onCreateView(
@@ -53,6 +56,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
         init(view)
         getDataFromFirebase()
         registerEvent()
+        setupSwipeToDelete()
     }
 
     private fun init(view: View) {
@@ -73,10 +77,31 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
     }
 
 
+    private fun setupSwipeToDelete() {
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val todoData = mList[position]
+                onDelTask(todoData)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }
+
     private fun registerEvent() {
-        binding.btnDrawer.setOnClickListener {
-            auth.signOut()
-            navController.navigate(R.id.action_taskPannelFragment_to_loginFragment)
+
+        binding.profileCard.setOnClickListener{
+            navController.navigate(R.id.action_taskPanelFragment_to_profileFragment)
         }
 
         binding.btnAddTask.setOnClickListener {
@@ -108,6 +133,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
                         append("Hey ")
                         append(username)
                     }
+                    email = document.getString("email")?.replaceFirstChar { it.uppercase() } ?: ""
                 }
             }
             .addOnFailureListener { exception ->

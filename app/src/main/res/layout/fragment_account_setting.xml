@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:text="@string/account_setting"
         android:textColor="@color/black"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
+        android:fontFamily="@font/gravitas_one"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,13 +24,14 @@
         android:id="@+id/text_view1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:text="@string/current_password"
         android:textAlignment="center"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:layout_marginTop="70dp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/guideline3"/>
+        app:layout_constraintBottom_toTopOf="@id/cardview1"
+        app:layout_constraintTop_toTopOf="@id/guideline6"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardview1"
@@ -39,10 +41,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/text_view1"
-        app:layout_constraintBottom_toBottomOf="@id/text_view1">
+        app:layout_constraintTop_toBottomOf="@id/text_view1">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -57,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/enter_your_current_password"
                 android:inputType="textPassword"/>
 
@@ -67,13 +69,13 @@
         android:id="@+id/text_view2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="@string/new_npassword"
         android:textAlignment="center"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/text_view1"/>
+        app:layout_constraintTop_toBottomOf="@id/cardview1"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardview2"
@@ -83,10 +85,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/text_view2"
-        app:layout_constraintBottom_toBottomOf="@id/text_view2">
+        app:layout_constraintTop_toBottomOf="@id/text_view2">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -101,6 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/enter_new_password"
                 android:inputType="textPassword"/>
 
@@ -113,11 +115,11 @@
         android:layout_height="wrap_content"
         android:text="@string/re_enter_npassword"
         android:textAlignment="center"
-        android:textSize="20sp"
         android:textColor="@color/black"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/text_view2"/>
+        app:layout_constraintTop_toBottomOf="@id/cardview2"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardview3"
@@ -127,10 +129,9 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp"
         app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="@id/guideline5"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toStartOf="@id/guideline2"
-        app:layout_constraintTop_toTopOf="@id/text_view3"
-        app:layout_constraintBottom_toBottomOf="@id/text_view3">
+        app:layout_constraintTop_toBottomOf="@id/text_view3">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -145,6 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
+                android:textSize="14sp"
                 android:hint="@string/re_enter_new_password"
                 android:inputType="textPassword"/>
 
@@ -156,7 +158,7 @@
         android:layout_height="70dp"
         android:id="@+id/image1"
         android:contentDescription="@string/Button"
-        android:src="@drawable/img"
+        android:src="@drawable/btn_gradient"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/guideline4"
@@ -168,14 +170,12 @@
         android:layout_height="wrap_content"
         android:text="@string/change_password"
         android:textStyle="bold"
-        android:textSize="32sp"
+        android:textSize="28sp"
         android:textColor="@color/white"
-        android:paddingBottom="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guideline4"
-        app:layout_constraintBottom_toTopOf="@id/guideline4"/>
+        app:layout_constraintEnd_toEndOf="@id/image1"
+        app:layout_constraintStart_toStartOf="@id/image1"
+        app:layout_constraintBottom_toBottomOf="@id/image1"
+        app:layout_constraintTop_toTopOf="@id/image1"/>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -183,14 +183,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -198,6 +198,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.235" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

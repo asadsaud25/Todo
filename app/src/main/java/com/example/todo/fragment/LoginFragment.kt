@@ -31,7 +31,7 @@ class LoginFragment : Fragment() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            navController.navigate(R.id.action_loginFragment_to_taskPannelFragment)
+            navController.navigate(R.id.action_loginFragment_to_taskPanelFragment)
         }
     }
 
@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                     .addOnSuccessListener {
                         Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.GONE
-                        navController.navigate(R.id.action_loginFragment_to_taskPannelFragment)
+                        navController.navigate(R.id.action_loginFragment_to_taskPanelFragment)
                     }
                     .addOnFailureListener {
                         binding.progressBar.visibility = View.GONE

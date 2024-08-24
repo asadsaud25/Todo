@@ -4,33 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background3"
+    android:background="@drawable/background2"
     tools:context=".fragment.TaskPanelFragment">
 
 
-    <ImageView
-        android:id="@+id/profile_pic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/img_4"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profile_card"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="60dp"
         app:layout_constraintBottom_toBottomOf="@id/guideline2"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
-        app:layout_constraintTop_toTopOf="@id/guideline2" />
+        app:layout_constraintTop_toTopOf="@id/guideline2">
 
-    <ImageView
-        android:id="@+id/btn_drawer"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/img_1"
-        app:layout_constraintBottom_toTopOf="@id/profile_pic"
-        app:layout_constraintStart_toEndOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_gravity="center"
+            android:src="@drawable/profile_pic" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_drawer"-->
+<!--        android:layout_width="40dp"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:src="@drawable/img_1"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/profile_card"-->
+<!--        app:layout_constraintStart_toEndOf="@id/guideline1"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/text_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hey"
         android:textColor="@color/black"
         android:textSize="32sp"
         android:textStyle="bold"
@@ -41,7 +51,6 @@
         android:id="@+id/text_task_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/today_you_have_no_task_to_do"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -51,39 +60,45 @@
         android:id="@+id/cardview1"
         android:layout_width="360dp"
         android:layout_height="90dp"
-        android:layout_margin="20dp"
+        android:layout_marginBottom="10dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/profile_pic">
+        app:layout_constraintTop_toBottomOf="@id/profile_card">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/gradient1"
-            android:gravity="center_vertical"
-            android:outlineProvider="paddedBounds"
+            android:gravity="center"
             android:padding="10dp"
             android:text="@string/todo_list"
+            android:fontFamily="@font/gravitas_one"
             android:textColor="@color/black"
-            android:textSize="40sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/btn_add_task"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="35dp"
-            android:src="@drawable/img_2" />
     </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/btn_add_task"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:elevation="10dp"
+        android:background="@drawable/white_btn"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@id/cardview1"
@@ -101,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.20" />
+        app:layout_constraintGuide_percent="0.10" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -115,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.89" />
 
     <ProgressBar
         android:id="@+id/progressBar"

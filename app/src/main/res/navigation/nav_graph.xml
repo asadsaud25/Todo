@@ -11,8 +11,8 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_taskPannelFragment"
-            app:destination="@id/taskPannelFragment"
+            android:id="@+id/action_splashFragment_to_taskPanelFragment"
+            app:destination="@id/taskPanelFragment"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true"/>
         <action
@@ -51,8 +51,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_loginFragment_to_taskPannelFragment"
-            app:destination="@id/taskPannelFragment"
+            android:id="@+id/action_loginFragment_to_taskPanelFragment"
+            app:destination="@id/taskPanelFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -73,12 +73,20 @@
             app:popUpToInclusive="true"/>
     </fragment>
     <fragment
-        android:id="@+id/taskPannelFragment"
+        android:id="@+id/taskPanelFragment"
         android:name="com.example.todo.fragment.TaskPanelFragment"
-        android:label="fragment_task_pannel"
+        android:label="fragment_task_panel"
         tools:layout="@layout/fragment_task_panel" >
         <action
-            android:id="@+id/action_taskPannelFragment_to_loginFragment"
+            android:id="@+id/action_taskPanelFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_taskPanelFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.todo.fragment.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>

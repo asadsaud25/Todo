@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
 
         Handler(Looper.myLooper()!!).postDelayed( {
             if(auth.currentUser != null) {
-                navController.navigate(R.id.action_splashFragment_to_taskPannelFragment)
+                navController.navigate(R.id.action_splashFragment_to_taskPanelFragment)
             } else{
                 navController.navigate(R.id.action_splashFragment_to_loginFragment)
             }

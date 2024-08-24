@@ -33,7 +33,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="account_setting">Account Setting</string>
     <string name="current_password">Current Password</string>
-    <string name="re_enter_npassword">Re-enter\nPassword</string>
+    <string name="re_enter_npassword">Re-enter Password</string>
     <string name="enter_your_current_password">Enter Your Current Password</string>
     <string name="re_enter_new_password">Re-enter New Password</string>
     <string name="enter_new_password">Enter New Password</string>

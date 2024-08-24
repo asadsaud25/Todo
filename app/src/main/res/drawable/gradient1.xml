@@ -7,11 +7,10 @@
         android:startColor="@color/grade_color"
         >
     </gradient>
+    <corners
+        android:radius="1dp"/>
     <stroke
         android:color="@color/black"
-        android:width="3dp">
-    </stroke>
-    <corners
-        android:radius="10dp">
-    </corners>
+        android:width="3dp"
+        />
 </shape>

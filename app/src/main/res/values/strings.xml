@@ -37,9 +37,9 @@
     <string name="dd_mm_yyyy">DD-MM-YYYY</string>
     <string name="save_changes">Save Changes</string>
     <string name="account_setting">Account Setting</string>
-    <string name="current_password">Current\nPassword</string>
-    <string name="new_npassword">New\nPassword</string>
-    <string name="re_enter_npassword">Re-enter\nPassword</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_npassword">New Password</string>
+    <string name="re_enter_npassword">Re-enter Password</string>
     <string name="enter_your_current_password">Enter Your Current Password</string>
     <string name="re_enter_new_password">Re-enter New Password</string>
     <string name="enter_new_password">Enter New Password</string>
@@ -50,4 +50,6 @@
     <string name="item_1">Item 1</string>
     <string name="hey">Hey</string>
     <string name="today_you_have_no_task_to_do">Today you have no task to do</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
 </resources>

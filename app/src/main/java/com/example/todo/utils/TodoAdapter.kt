@@ -31,11 +31,7 @@ RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
             with(list[position]) {
                 binding.todoTask.text = this.task
 
-                binding.delTask.setOnClickListener {
-                    listener?.onDelTask(this)
-                }
-
-                binding.editTask.setOnClickListener {
+                binding.cardview.setOnClickListener {
                     listener?.onEditTask(this)
                 }
             }
