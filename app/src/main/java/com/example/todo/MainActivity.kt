@@ -1,7 +1,14 @@
 package com.example.todo
 
+import android.annotation.SuppressLint
+import android.graphics.Rect
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -9,20 +16,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.todo.databinding.ActivityMainBinding
-import com.example.todo.fragment.AboutUsFragment
-import com.example.todo.fragment.AccountSettingFragment
-import com.example.todo.fragment.ProfileFragment
-import com.example.todo.fragment.TaskPanelFragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,7 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
     private lateinit var fragmentManager: FragmentManager
-    private lateinit var fragmentTransaction: FragmentTransaction
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var db: FirebaseFirestore
@@ -73,9 +75,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 R.id.loginFragment,
                 R.id.signupFragment,
                 R.id.forgotPasswordFragment -> {
-                    toggle.setDrawerIndicatorEnabled(false)
+                    toggle.isDrawerIndicatorEnabled = false
+                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                     binding.navView.isVisible = false
                 } else -> {
+                    toggle.isDrawerIndicatorEnabled = true
+                    binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     binding.navView.isVisible = true
                 }
             }
@@ -84,6 +89,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         auth.addAuthStateListener {
             getData()
         }
+//        setupUI(binding.root)
     }
 
 
@@ -98,6 +104,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navHostFragment = supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
         navController = navHostFragment.navController
     }
+
+//    @SuppressLint("ClickableViewAccessibility")
+//    private fun setupUI(view: View) {
+//        if(view !is EditText) {
+//            view.setOnTouchListener { _, _ ->
+//                hidKeyBoard()
+//                false
+//            }
+//        }
+//        if(view is ViewGroup) {
+//            for(i in 0 until view.childCount) {
+//                val innerView = view.getChildAt(i)
+//                setupUI(innerView)
+//            }
+//        }
+//    }
 
     private fun getData() {
 
@@ -125,39 +147,73 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
         }
     }
-    private fun openFragment(fragment: Fragment) {
-        fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.nav_host_fragment, fragment)
-        fragmentTransaction.commit()
-    }
 
-    override fun onNavigationItemSelected(Item: MenuItem): Boolean {
-        when (Item.itemId) {
-            // Drawer menu items
-            R.id.nav_home -> openFragment(TaskPanelFragment())
-            R.id.nav_settings -> openFragment(AccountSettingFragment())
-            R.id.nav_profile -> openFragment(ProfileFragment())
-            R.id.nav_about -> openFragment(AboutUsFragment())
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> navController.navigate(R.id.taskPanelFragment)
+            R.id.nav_settings -> navController.navigate(R.id.accountSettingFragment)
+            R.id.nav_profile -> navController.navigate(R.id.profileFragment)
+            R.id.nav_about -> navController.navigate(R.id.aboutUsFragment)
             R.id.nav_logout -> {
                 auth.signOut()
-                navController.navigate(R.id.loginFragment)
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(R.id.nav_graph, true) // The second parameter is for inclusive
+                    .build()
+
+                navController.navigate(R.id.loginFragment, null, navOptions)
             }
             else -> return false
         }
+//        hidKeyBoard()
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            // If the drawer is open, close it
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        }else {
-            super.onBackPressedDispatcher.onBackPressed()
+        } else {
+            // If the drawer is closed, handle the back press as usual
+            super.onBackPressed() // Use this instead of calling super.onBackPressed()
         }
-        super.onBackPressed()
     }
+
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
+    /*
+    * ATTENTION!
+    *
+    * Hide Keyboard function not working properly....
+    *
+    * */
+//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+//        if (ev.action == MotionEvent.ACTION_DOWN) {
+//            val v = currentFocus
+//            if (v is EditText) {
+//                val outRect = Rect()
+//                v.getGlobalVisibleRect(outRect)
+//                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+//                    v.clearFocus()
+//                    hidKeyBoard()
+//                }
+//            }
+//        }
+//        return super.dispatchTouchEvent(ev)
+//    }
+
+//    private fun hidKeyBoard() {
+//        val view = this.currentFocus
+//        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//        view?.let {
+//            imm.hideSoftInputFromWindow(it.windowToken, 0)
+//            it.clearFocus()
+//        }
+//
+//    }
 }

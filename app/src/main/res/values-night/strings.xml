@@ -44,4 +44,8 @@
     <string name="item_1">Item 1</string>
     <string name="hey">Hey</string>
     <string name="today_you_have_no_task_to_do">Today you have no task to do</string>
+    <string name="urgent_amp_important"><![CDATA[Urgent & Important]]></string>
+    <string name="important_but_not_urgent">Important But Not Urgent</string>
+    <string name="not_important_but_urgent">Not Important But Urgent</string>
+    <string name="neither_important_nor_urgent">Neither Important Nor Urgent</string>
 </resources>

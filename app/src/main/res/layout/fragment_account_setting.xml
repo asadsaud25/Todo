@@ -54,7 +54,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput1"
+                android:id="@+id/currentPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -98,7 +98,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput2"
+                android:id="@+id/newPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -142,7 +142,7 @@
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput3"
+                android:id="@+id/confirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
@@ -156,7 +156,7 @@
     <ImageView
         android:layout_width="280dp"
         android:layout_height="70dp"
-        android:id="@+id/image1"
+        android:id="@+id/btnChangePassword"
         android:contentDescription="@string/Button"
         android:src="@drawable/btn_gradient"
         app:layout_constraintStart_toStartOf="parent"
@@ -165,17 +165,17 @@
         app:layout_constraintTop_toBottomOf="@id/guideline4"/>
 
     <TextView
-        android:id="@+id/text_view5"
+        android:id="@+id/text_view4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_password"
         android:textStyle="bold"
         android:textSize="28sp"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/image1"
-        app:layout_constraintStart_toStartOf="@id/image1"
-        app:layout_constraintBottom_toBottomOf="@id/image1"
-        app:layout_constraintTop_toTopOf="@id/image1"/>
+        app:layout_constraintEnd_toEndOf="@id/btnChangePassword"
+        app:layout_constraintStart_toStartOf="@id/btnChangePassword"
+        app:layout_constraintBottom_toBottomOf="@id/btnChangePassword"
+        app:layout_constraintTop_toTopOf="@id/btnChangePassword"/>
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -219,4 +219,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.28" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/btnChangePassword"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline1"
+        app:layout_constraintTop_toBottomOf="@+id/cardview3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

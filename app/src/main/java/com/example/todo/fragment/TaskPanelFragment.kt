@@ -174,7 +174,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
 
     }
 
-    override fun onSaveTask(todo: String, todoEt: TextInputEditText) {
+    override fun onSaveTask(todo: String, lable: String, todoEt: TextInputEditText) {
         databaseRef.push().setValue(todo).addOnCompleteListener {
             if (it.isSuccessful) {
                 Toast.makeText(context, "Todo saved successfully", Toast.LENGTH_SHORT).show()

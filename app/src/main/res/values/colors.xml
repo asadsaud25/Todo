@@ -10,5 +10,7 @@
     <color name="drawer_bg1">#44BEC6</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
+    <color name="blue">#0000FF</color>"
+    <color name="yellow">#FFFF00</color>
     <color name="drawer_bg2">#093437</color>
 </resources>
