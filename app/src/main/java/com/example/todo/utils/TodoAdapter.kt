@@ -3,6 +3,7 @@ package com.example.todo.utils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo.R
 import com.example.todo.databinding.EachTodoItemBinding
 import com.example.todo.fragment.TaskPanelFragment
 
@@ -30,7 +31,13 @@ RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
         with(holder) {
             with(list[position]) {
                 binding.todoTask.text = this.task
-
+                val labelColor = when (this.label) {
+                    2131 -> R.drawable.red_bar
+                    3120 -> R.drawable.yellow_bar
+                    3021 -> R.drawable.blue_bar
+                    else -> R.drawable.green_bar
+                }
+                binding.labelColor.setImageResource(labelColor)
                 binding.cardview.setOnClickListener {
                     listener?.onEditTask(this)
                 }

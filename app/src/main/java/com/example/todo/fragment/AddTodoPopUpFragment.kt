@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
-import androidx.compose.material3.RadioButton
 import androidx.fragment.app.DialogFragment
 import com.example.todo.databinding.FragmentAddTodoPopUpBinding
 import com.example.todo.utils.TodoData
@@ -28,10 +27,11 @@ class AddTodoPopUpFragment : DialogFragment() {
         const val TAG = "AddTodoPopUpFragment"
 
         @JvmStatic
-        fun newInstance(taskId: String, task: String) = AddTodoPopUpFragment().apply {
+        fun newInstance(taskId: String, task: String, label: Int) = AddTodoPopUpFragment().apply {
             arguments = Bundle().apply {
                 putString("taskId", taskId)
                 putString("task", task)
+                putInt("label", label)
             }
         }
     }
@@ -50,7 +50,8 @@ class AddTodoPopUpFragment : DialogFragment() {
         if (arguments != null) {
             todoData = TodoData(
                 arguments?.getString("taskId").toString(),
-                arguments?.getString("task").toString()
+                arguments?.getString("task").toString(),
+                arguments?.getInt("label") ?: -1
             )
 
             binding.taskEt.setText(todoData?.task)
@@ -85,19 +86,22 @@ class AddTodoPopUpFragment : DialogFragment() {
 
     private fun registerEvents() {
         binding.btnAddTask.setOnClickListener {
-
             val todoTask = binding.taskEt.text.toString()
 
             if (todoTask.isNotEmpty()) {
                 if (selectedRadioButton != null) {
-                    val label = selectedRadioButton?.text.toString()
-
-                    Toast.makeText(context, "Selected: $label", Toast.LENGTH_SHORT).show()
+                    val label: Int = when (selectedRadioButton?.id) {
+                        binding.op1.id -> 2131 // Urgent and important
+                        binding.op2.id -> 3120 // Important but not urgent
+                        binding.op3.id -> 3021 // Not important but urgent
+                        else -> 3020 // Not important and not urgent
+                    }
 
                     if (todoData == null) {
                         listener.onSaveTask(todoTask, label, binding.taskEt)
                     } else {
                         todoData?.task = todoTask
+                        todoData?.label = label
                         listener.onUpdateTask(todoData!!, binding.taskEt)
                     }
                 } else {
@@ -125,7 +129,7 @@ class AddTodoPopUpFragment : DialogFragment() {
     }
 
     interface DialogNextBtnClickListener {
-        fun onSaveTask(todo: String, lable: String, todoEt: TextInputEditText)
+        fun onSaveTask(todo: String, lable: Int, todoEt: TextInputEditText)
         fun onUpdateTask(todoData: TodoData, todoEt: TextInputEditText)
     }
 

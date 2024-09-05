@@ -6,8 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -133,7 +131,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
                         append("Hey ")
                         append(username)
                     }
-                    email = document.getString("email")?.replaceFirstChar { it.uppercase() } ?: ""
+                    email = document.getString("email")
                 }
             }
             .addOnFailureListener { exception ->
@@ -143,12 +141,13 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
         databaseRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 mList.clear()
-                for (taskSnapShot in snapshot.children) {
-                    val todoTask = taskSnapShot.key?.let {
-                        TodoData(it, taskSnapShot.value.toString())
-                    }
+                for (taskSnapshot in snapshot.children) {
+                    val taskId = taskSnapshot.key
+                    val task = taskSnapshot.child("task").value?.toString()
+                    val label = taskSnapshot.child("label").value?.toString()?.toIntOrNull() ?: 0 // Default label to 0 if missing
 
-                    if (todoTask != null) {
+                    if (taskId != null && task != null) {
+                        val todoTask = TodoData(taskId, task, label)
                         mList.add(todoTask)
                     }
                 }
@@ -174,32 +173,43 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
 
     }
 
-    override fun onSaveTask(todo: String, lable: String, todoEt: TextInputEditText) {
-        databaseRef.push().setValue(todo).addOnCompleteListener {
+    override fun onSaveTask(todo: String, label: Int, todoEt: TextInputEditText) {
+        val taskId = databaseRef.push().key
+        if (taskId != null) {
+            val taskData = HashMap<String, Any>()
+            taskData["task"] = todo
+            taskData["label"] = label
+
+            databaseRef.child(taskId).setValue(taskData).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "Todo saved successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
+                }
+                todoEt.text = null
+                popUpFragment?.dismiss()
+            }
+        }
+    }
+
+
+    override fun onUpdateTask(todoData: TodoData, todoEt: TextInputEditText) {
+        val taskUpdateMap = mapOf(
+            "task" to todoData.task,
+            "label" to todoData.label
+        )
+
+        databaseRef.child(todoData.taskId).updateChildren(taskUpdateMap).addOnCompleteListener {
             if (it.isSuccessful) {
-                Toast.makeText(context, "Todo saved successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Task updated successfully", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(context, "Error!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error!!", Toast.LENGTH_SHORT).show()
             }
             todoEt.text = null
             popUpFragment?.dismiss()
         }
     }
 
-    override fun onUpdateTask(todoData: TodoData, todoEt: TextInputEditText) {
-        val map = HashMap<String, Any>()
-        map[todoData.taskId] = todoData.task
-        databaseRef.updateChildren(map).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Toast.makeText(context, "Task updated successfully", Toast.LENGTH_SHORT).show()
-
-            } else {
-                Toast.makeText(context, "Error!!", Toast.LENGTH_SHORT).show()
-            }
-            todoEt.text = null
-            popUpFragment!!.dismiss()
-        }
-    }
 
     override fun onDelTask(todoData: TodoData) {
         databaseRef.child(todoData.taskId).removeValue().addOnCompleteListener {
@@ -216,7 +226,7 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
             childFragmentManager.beginTransaction().remove(popUpFragment!!).commit()
         }
 
-        popUpFragment = AddTodoPopUpFragment.newInstance(todoData.taskId, todoData.task)
+        popUpFragment = AddTodoPopUpFragment.newInstance(todoData.taskId, todoData.task, todoData.label)
         popUpFragment!!.setListener(this)
         popUpFragment!!.show(childFragmentManager, AddTodoPopUpFragment.TAG)
 
