@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Todo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo">TODO</string>
-    <string name="designedby">Designed By Asad Saud</string>
+    <string name="quote">The Best Way To Get\nYour Task Done</string>
+    <string name="designed_by">Designed By Asad Saud</string>
     <string name="welcome">Welcome</string>
     <string name="signup">Sign Up To Get Started</string>
     <string name="first_name">First Name</string>
@@ -12,15 +16,17 @@
     <string name="enter_your_last">Enter Your Last Name</string>
     <string name="enter_your_firstname">Enter Your first Name</string>
     <string name="usr">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
     <string name="re_enter_password">Re-enter Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="welcome_back">Welcome Back!</string>
     <string name="login">Let\'s Continue The Journey.</string>
     <string name="log_in">Log In</string>
-    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="create_account">Create Account</string>
     <string name="don_t_have_an_account">Don\'t have an Account?</string>
-    <string name="already_have_an_account">Aready Have An Account?</string>
+    <string name="already_have_an_account">Already Have An Account?</string>
     <string name="forgot_password_h">Forgot \nPassword?</string>
     <string name="reset_password">Reset Password</string>
     <string name="remember_password">Remember Password?</string>
@@ -33,6 +39,7 @@
     <string name="save_changes">Save Changes</string>
     <string name="account_setting">Account Setting</string>
     <string name="current_password">Current Password</string>
+    <string name="new_npassword">New Password</string>
     <string name="re_enter_npassword">Re-enter Password</string>
     <string name="enter_your_current_password">Enter Your Current Password</string>
     <string name="re_enter_new_password">Re-enter New Password</string>
@@ -44,8 +51,12 @@
     <string name="item_1">Item 1</string>
     <string name="hey">Hey</string>
     <string name="today_you_have_no_task_to_do">Today you have no task to do</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
     <string name="urgent_amp_important"><![CDATA[Urgent & Important]]></string>
     <string name="important_but_not_urgent">Important But Not Urgent</string>
     <string name="not_important_but_urgent">Not Important But Urgent</string>
     <string name="neither_important_nor_urgent">Neither Important Nor Urgent</string>
+    <string name="long_text">\t\tThis TODO application is a minor project developed by pre-final year Under Graduate Student Asad Saud of Aligarh Muslim University, Aligarh, Uttar Pradesh, India, as part of his journey in mastering Android development. Throughout the course of building this app, we have deepened our understanding of key Android concepts such as navigation, RecyclerView, Firebase integration, and UI design.\n\n\t\tThe app is based on the Eisenhower Matrix classification of tasks, which helps users prioritize their work by categorizing tasks into four quadrants: urgent and important, not urgent but important, urgent but not important, and neither urgent nor important. This structure enables users to focus on what truly matters, improving productivity and efficiency.\n\n\t\tOur goal with this project is to deliver a seamless task management experience, allowing users to organize and complete tasks with clarity and purpose.</string>
+    <string name="about_us">About Us</string>
 </resources>

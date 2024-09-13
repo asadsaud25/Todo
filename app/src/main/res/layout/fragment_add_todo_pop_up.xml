@@ -141,7 +141,7 @@
         </RadioGroup>
 
         <ImageView
-            android:id="@id/image1"
+            android:id="@id/savebtn"
             android:layout_width="120dp"
             android:layout_height="35dp"
             android:layout_marginBottom="5dp"
@@ -158,10 +158,10 @@
             android:text="@string/add_task"
             android:textColor="@color/black"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@id/image1"
-            app:layout_constraintEnd_toEndOf="@id/image1"
-            app:layout_constraintStart_toStartOf="@id/image1"
-            app:layout_constraintTop_toTopOf="@id/image1" />
+            app:layout_constraintBottom_toBottomOf="@id/savebtn"
+            app:layout_constraintEnd_toEndOf="@id/savebtn"
+            app:layout_constraintStart_toStartOf="@id/savebtn"
+            app:layout_constraintTop_toTopOf="@id/savebtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

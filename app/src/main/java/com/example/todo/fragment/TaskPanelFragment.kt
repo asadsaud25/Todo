@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.todo.R
 import com.example.todo.databinding.FragmentTaskPanelBinding
 import com.example.todo.utils.TodoAdapter
@@ -132,6 +134,14 @@ class TaskPanelFragment : Fragment(), AddTodoPopUpFragment.DialogNextBtnClickLis
                         append(username)
                     }
                     email = document.getString("email")
+                    val profilePicUrl = document.getString("profile_pic")
+
+                    if (profilePicUrl != null) {
+                        val profileImageView = binding.profilePic.findViewById<ImageView>(R.id.profile_pic)
+                        Glide.with(this)
+                            .load(profilePicUrl)
+                            .into(profileImageView)
+                    }
                 }
             }
             .addOnFailureListener { exception ->

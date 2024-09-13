@@ -13,4 +13,8 @@
     <color name="blue">#0000FF</color>"
     <color name="yellow">#FFFF00</color>
     <color name="drawer_bg2">#093437</color>
+    <color name="primaryColor">#6200EE</color>
+    <color name="primaryColorDark">#3700B3</color>
+    <color name="primaryColorLight">#BB86FC</color>
+    <color name="secondaryColor">#03DAC5</color>
 </resources>

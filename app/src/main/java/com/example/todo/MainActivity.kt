@@ -1,12 +1,12 @@
 package com.example.todo
 
-import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -25,10 +25,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.example.todo.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,7 +44,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var db: FirebaseFirestore
     private var username: String? = null
     private var email: String? = null
-    private var profilePic: ImageView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +90,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         auth.addAuthStateListener {
             getData()
         }
-//        setupUI(binding.root)
     }
 
 
@@ -105,48 +105,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navController = navHostFragment.navController
     }
 
-//    @SuppressLint("ClickableViewAccessibility")
-//    private fun setupUI(view: View) {
-//        if(view !is EditText) {
-//            view.setOnTouchListener { _, _ ->
-//                hidKeyBoard()
-//                false
-//            }
-//        }
-//        if(view is ViewGroup) {
-//            for(i in 0 until view.childCount) {
-//                val innerView = view.getChildAt(i)
-//                setupUI(innerView)
-//            }
-//        }
-//    }
-
     private fun getData() {
-
         if(auth.currentUser != null) {
-            val uid = auth.currentUser?.uid?: return
+            val uid = auth.currentUser?.uid ?: return
             val userRef = db.collection("users").document(uid)
             userRef.get()
                 .addOnSuccessListener { document ->
-                    if(document.exists()) {
+                    if (document.exists()) {
                         username = document.getString("username")?.replaceFirstChar { it.uppercase() } ?: ""
-                        email = document.getString("email")?.replaceFirstChar { it.uppercase() } ?: ""
-                        profilePic = document.get("profile_pic") as ImageView?
+                        email = document.getString("email")
+                        val profilePicUrl = document.getString("profile_pic") // Get the URL of the profile picture
 
-
+                        // Set username and email
                         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.username).text = username
                         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.email).text = email
-                        if(profilePic != null) {
-                            binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.profile_pic).setImageDrawable(profilePic?.drawable)
+
+                        // Load the profile picture using Glide
+                        if (profilePicUrl != null) {
+                            val profileImageView = binding.navView.getHeaderView(0).findViewById<ImageView>(R.id.profile_pic)
+                            Glide.with(this)
+                                .load(profilePicUrl)
+                                .into(profileImageView)
                         }
                     }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(this, "Error! couldn't load username and email", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this, "Error! couldn't load username and email", Toast.LENGTH_SHORT).show()
                 }
         }
     }
+
 
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -165,7 +153,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             else -> return false
         }
-//        hidKeyBoard()
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -192,28 +179,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     * Hide Keyboard function not working properly....
     *
     * */
-//    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-//        if (ev.action == MotionEvent.ACTION_DOWN) {
-//            val v = currentFocus
-//            if (v is EditText) {
-//                val outRect = Rect()
-//                v.getGlobalVisibleRect(outRect)
-//                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
-//                    v.clearFocus()
-//                    hidKeyBoard()
-//                }
-//            }
-//        }
-//        return super.dispatchTouchEvent(ev)
-//    }
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            val v = currentFocus
+            if (v is EditText) {
+                val outRect = Rect()
+                v.getGlobalVisibleRect(outRect)
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
+                    v.clearFocus() // Clear focus from EditText
+                    hideKeyboard(this) // Hide keyboard
+                }
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
-//    private fun hidKeyBoard() {
-//        val view = this.currentFocus
-//        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//        view?.let {
-//            imm.hideSoftInputFromWindow(it.windowToken, 0)
-//            it.clearFocus()
-//        }
-//
-//    }
+    private fun hideKeyboard(activity: Activity) {
+        val inputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val view = activity.currentFocus ?: View(activity) // If no view is focused, create a new one
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
 }
