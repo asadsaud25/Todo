@@ -1,6 +1,5 @@
 package com.example.todo.fragment
 
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -35,7 +34,6 @@ class ProfileFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     private var username: String? = null
     private var email: String? = null
-    private var profilePic: Image? = null
     private var birthday: Date? = null
     private var profilePicUri: String? = null
     private val REQUEST_CODE_IMAGE_PICK = 100
@@ -84,10 +82,9 @@ class ProfileFragment : Fragment() {
                 if (document.exists()) {
                     username = document.getString("username")
                     email = document.getString("email")
-                    profilePic = document.get("profile_pic") as? Image
                     birthday = document.getDate("birthday")
-
-                    setData(username, email, profilePicUri, birthday, profilePic)
+                    profilePicUri = document.getString("profile_pic")
+                    setData(username, email, profilePicUri, birthday)
                 }
             }
             .addOnFailureListener {
@@ -96,12 +93,12 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun setData(username: String?, email: String?, profilePicUrl: String?, birthday: Date?, profilePic: Image?) {
+    private fun setData(username: String?, email: String?, profilePicUrl: String?, birthday: Date?) {
         binding.textInput1.setText(username)
         binding.textInput2.setText(email)
         binding.textInput3.setText(birthday?.let { SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(it) })
 
-        // Load the profile picture from the URL using Glide or Picasso
+        // Load the profile picture from the URL using Glide
         if (!profilePicUrl.isNullOrEmpty()) {
             Glide.with(this).load(profilePicUrl).into(binding.pic)  // Using Glide to load image
         }
@@ -179,7 +176,7 @@ class ProfileFragment : Fragment() {
         Log.d("FirebaseStorage", "Uploading to path: profile_pics/$uid.jpg")
         Log.d("ImageURI", "Selected image URI: $imageUri")
 
-        binding.progressBar3.visibility = View.VISIBLE
+
         // Start the upload
         storageRef.putFile(imageUri)
             .addOnSuccessListener {
@@ -196,7 +193,7 @@ class ProfileFragment : Fragment() {
                 Log.e("Firebase", "Failed to upload image: ${e.message}")
                 Toast.makeText(context, "Failed to upload image: ${e.message}", Toast.LENGTH_LONG).show()
             }
-        binding.progressBar3.visibility = View.GONE
+
     }
 
 }
