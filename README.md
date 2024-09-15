@@ -26,7 +26,7 @@ This classification helps users make informed decisions on what to prioritize in
 - ☁️ **Firebase Firestore Integration**: Tasks are stored in Firebase Firestore, providing real-time sync across devices.
 - 📱 **Responsive UI**: A clean and user-friendly interface built using modern Android UI components like Navigation Drawer, Fragments, and RecyclerView for task management.
 
-## 🖼️ Screenshots (Coming Soon)
+## 🖼️ Screenshots 
 ![splash](https://github.com/user-attachments/assets/5afde338-b43e-4ff7-ba16-9b2273d5d490)
 ![LogIn](https://github.com/user-attachments/assets/5594b2ac-1b90-4b5f-9436-a93bd2f48bdb)
 ![home](https://github.com/user-attachments/assets/7ef80179-974d-4dab-ba77-289745b845de)
