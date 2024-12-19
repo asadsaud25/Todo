@@ -49,7 +49,7 @@ To run this project locally, follow these steps:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/ryankhan9999/todo-app.git
+   git clone https://github.com/asadsaud25/Todo.git
 
 2. Open the project in Android Studio.
 
